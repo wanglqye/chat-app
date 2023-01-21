@@ -3,7 +3,7 @@
 		<view class="top-bar">
 			<view class="top-bar-content">
 				<view class="top-bar-left">
-					<image src="../../static/images/avatar.png" mode=""></image>
+					<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
 				</view>
 				<view class="top-bar-text">
 					<text>聊天</text>
@@ -24,15 +24,30 @@
 						好友请求
 					</view>
 					<view class="item-msg">
-						
+						就是你的那额，不用点开始速就是你的那额，不用点开始速就是你的那额，不用点开始速
 					</view>
 				</view>
 				<view class="item-time">
 					上午7:45
 				</view>
 			</view>
-			<view class="msg-list">
-				
+			<view class="msg-list" v-for="item in msgList" :key="item.username">
+				<view class="msg-item">
+					<view class="item-avatar">
+						<image :src="item.avator" ></image>
+					</view>
+					<view class="item-textarea">
+						<view class="item-name">
+							{{item.username}}
+						</view>
+						<view class="item-msg">
+							{{item.recentMsg}}
+						</view>
+					</view>
+					<view class="item-time">
+						{{item.time}}
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -96,7 +111,7 @@ import { onMounted,ref } from "vue";
 			display: flex;
 			height: 88rpx;
 			align-items: center;
-			padding: 0 10px;
+			padding: 0rpx 20rpx;
 		}
 		.top-bar-left{
 			width: 120rpx;
@@ -110,7 +125,7 @@ import { onMounted,ref } from "vue";
 			flex:1;
 			text-align: center;
 			text{
-				color: 	$uni-color-primary;
+				color: 	#000;
 				font-size: 34rpx;
 			} 
 		}
@@ -129,13 +144,25 @@ import { onMounted,ref } from "vue";
 	}
 	.main-content{
 		margin-top: 88rpx;
-		padding: 30rpx 30rpx;
+		flex:1;
+		width: 100%;
 		.msg-item{
 			display: flex;
-			background-color: palegreen;
+			padding: 32rpx 32rpx 10rpx;
 			.item-avatar{
 				width: 96rpx;
 				height: 96rpx;
+				margin-right: 32rpx;
+				image{
+					width: 100%;
+					height: 100%;
+					border-radius: $uni-border-radius-base;
+				}
+			}
+			.item-adduser{
+				width: 96rpx;
+				height: 96rpx;
+				margin-right: 32rpx;
 				border-radius: $uni-border-radius-base;
 				background-color: $uni-color-primary;
 				display: flex;
@@ -145,6 +172,26 @@ import { onMounted,ref } from "vue";
 					width: 60%;
 					height: 60%;
 				}
+			}
+			.item-textarea{
+				flex:1;
+				width: 0;
+				overflow: hidden;
+				.item-name{
+					font-size: 36rpx;
+					color: #272832;
+				}
+				.item-msg{
+					color: $uni-text-color-grey;
+					font-size: 28rpx;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+				}
+			}
+			.item-time{
+				font-size: 24rpx;
+				color: $uni-text-color-disable;
 			}
 		}
 	}
