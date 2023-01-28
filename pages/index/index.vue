@@ -1,5 +1,6 @@
 <template>
 	<view class="content">
+		<!-- <NavHeader/ > -->
 		<view class="top-bar">
 			<view class="top-bar-content">
 				<view class="top-bar-left">
@@ -55,6 +56,7 @@
 
 <script setup>
 import { onMounted,ref } from "vue";
+// import NavHeader from '../../components/navHeader.vue'
 	const msgList = ref([])
 	
 	onMounted(() => {
