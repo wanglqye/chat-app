@@ -11,11 +11,11 @@
 				<text class="cont-title">登录</text>
 				<text class="cont-desc">您好，欢迎来到CHat ~</text>
 				<view class="cont-inparea">
-					<input v-model="state.data" :value="state.data" type="text" class="cont-inp" placeholder="用户名/邮箱">
+					<input v-model="state.username" :value="state.username" type="text" class="cont-inp" placeholder="用户名/邮箱">
 					<input v-model="state.pwd" :value="state.pwd" type="text" class="cont-inp" placeholder="密码">
 				</view>
 				<view class="cont-button">
-					<view class="btn-style" @click="submit">登录</view>
+					<view class="btn-style" @tap="submit">登录</view>
 				</view>
 			</view>
 		</view>
@@ -23,45 +23,31 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive,inject } from "vue";
+import {request} from '../../api/http.js'
+	
 	
 	const state = reactive({
-		data:'小王',
+		username:'小王',
 		pwd:'123456'
 	})
-	const submit =() =>{
-		
-		// console.log(state)
-		// uni.request({
-		// 	url:'http://localhost:3000/signin/match',
-		// 	data:state,
-		// 	method:"POST",
-		// 	success: (res) => {
-		// 		console.log(res);
-		// 		if(res.statusCode === 200) {
-		// 			uni.switchTab({
-		// 				url:'/pages/index/index'
-		// 			})
-		// 		}
-		// 	}
-		// })
-		uni.request({
-			url:'http://localhost:3000/search/user',
-			data:{
-				data:'小'
-			},
-			method:"POST",
-			success: (res) => {
-				console.log(res);
-				// if(res.statusCode === 200) {
-				// 	uni.switchTab({
-				// 		url:'/pages/index/index'
-				// 	})
-				// }
-			}
+	
+	const submit = async () => {
+		console.log('??')
+	  let res = await request({
+			url:'/login',
+			data:state,
+			method:"POST"
 		})
-		
+		console.log(res)
+		if(res.status == 200){
+			uni.switchTab({
+				url:'/pages/index/index'
+			})
+		}
 	}
+
+	
 </script>
 
 <style lang="scss">
@@ -111,8 +97,8 @@ import { reactive } from "vue";
 		}
 	}
 	image{
-		width: 200rpx;
-		height: 200rpx;
+		width: 100rpx;
+		height: 100rpx;
 	}
 }
 </style>

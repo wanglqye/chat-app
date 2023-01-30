@@ -7,10 +7,10 @@
 					<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
 				</view>
 				<view class="top-bar-text">
-					<text>聊天</text>
+					<text class="bar-title">CHat</text>
 				</view>
 				<view class="top-bar-right">
-					<image src="../../static/images/new_search.png" mode="" class="first-img"></image>
+					<image src="../../static/images/new_search.png" mode="" class="first-img" @click="gotoSearch"></image>
 					<image src="../../static/images/add.png" mode=""></image>
 				</view>
 			</view>
@@ -56,8 +56,15 @@
 
 <script setup>
 import { onMounted,ref } from "vue";
+
 // import NavHeader from '../../components/navHeader.vue'
 	const msgList = ref([])
+	
+	const gotoSearch = () => {
+		uni.navigateTo({
+			url:'/pages/search/search'
+		})
+	}
 	
 	onMounted(() => {
 		msgList.value = [
@@ -109,6 +116,9 @@ import { onMounted,ref } from "vue";
 		width: 100%;
 		height: 88rpx;
 		box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.1);
+		.bar-title{
+			font-weight: bold;
+		}
 		.top-bar-content{
 			display: flex;
 			height: 88rpx;
@@ -118,8 +128,8 @@ import { onMounted,ref } from "vue";
 		.top-bar-left{
 			width: 120rpx;
 			image{
-				width: 68rpx;
-				height: 68rpx;
+				width: 56rpx;
+				height: 56rpx;
 				border-radius: 16rpx;
 			}
 		}
@@ -136,8 +146,8 @@ import { onMounted,ref } from "vue";
 			width: 120rpx;
 			justify-content: flex-end;
 			image{
-				width: 26px;
-				height: 26px;
+				width: 38rpx;
+				height: 38rpx;
 			}
 			.first-img{
 				margin-right: 26rpx;
