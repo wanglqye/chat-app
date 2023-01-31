@@ -17,7 +17,8 @@ export const request = (options) => {
 			url:BASEURL + options.url,
 			method:options.method || "GET",
 			header:{
-				token:uni.getStorageSync('user') ? uni.getStorageSync('user').token : ''
+				'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDhjN2JlZGJjNGM0MTk5NGU3NDQ3NiIsInRpbWUiOiIyMDIzLTAxLTMxVDEwOjA0OjEzLjkxM1oiLCJpYXQiOjE2NzUxNTk0NTMsImV4cCI6MTY4NTUyNzQ1M30.7r8raR77pJKbGjsxfGgW175XJ3Gm0asAJifYJU5Fjeg'
+				// token:uni.getStorageSync('user') ? uni.getStorageSync('user').token : ''
 			},
 			data:options.data || {},
 			success: (res) => {

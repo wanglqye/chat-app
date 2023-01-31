@@ -14,12 +14,12 @@
 					<view class="user-content">
 						<!-- <image :src="item.avator" mode=""></image> -->
 						<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
-						<text>{{item.username}}</text>
+						<text>{{item.name}}</text>
 						<view class="list-btn" :class="[item.status == 0 ? 'isFriend':'']">{{item.status == 0 ? '发消息' : '加好友'}}</view>
 					</view> 
 				</view>
 			</view>
-			<view class="main-user">
+			<!-- <view class="main-user">
 				<text class="main-title">群组</text>
 				<view class="user-list" v-for="item in data">
 					<view class="user-content">
@@ -28,7 +28,7 @@
 						<view class="list-btn" :class="[item.status == 0 ? 'isFriend':'']">{{item.status == 0 ? '发消息' : '加群'}}</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -58,7 +58,7 @@
 		})
 		console.log(res)
 		if(res.status && res.data && res.data.length > 0){
-			data.value = res.data.result
+			data.value = res.data
 		}
 	}
 	// const data = [
