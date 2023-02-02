@@ -1,25 +1,33 @@
 <template>
 	<view class="top-bar">
-		<view class="top-bar-content">
-			<view class="top-bar-left">
-				<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
-			</view>
-			<view class="top-bar-text">
-				<text>聊天</text>
-			</view>
-			<view class="top-bar-right">
-				<image src="../../static/images/new_search.png" mode="" class="first-img"></image>
-				<image src="../../static/images/add.png" mode=""></image>
-			</view>
+		<view class="left-content"><slot name="left"></slot></view>
+		<view class="right-content">
+			<image src="../static/images/search.png" mode=""></image>
+			<image src="../static/images/add.png" mode=""></image>
 		</view>
 	</view>
 </template>
 
-<script>
-	export default {
-		name:"NavHeader"
-	}
+<script setup>
+	import { defineProps }  from 'vue'
 </script>
 
-<style>
+<style lang="scss">
+	.top-bar {
+		display: flex;
+		padding: 20rpx;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid ;
+		border-color: $uni-border-color;
+		.left-content{
+		}
+		.right-content{
+			image{
+				width: 38rpx;
+				height: 38rpx;
+				margin-right: 20rpx;
+			}
+		}
+	}
 </style>

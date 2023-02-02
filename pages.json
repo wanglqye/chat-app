@@ -47,6 +47,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/contact/contact",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
@@ -64,6 +73,12 @@
 				"iconPath": "static/images/chat.png",
 				"selectedIconPath": "static/images/chat.png",
 				"text": "聊天"
+			},
+			{
+				"pagePath": "pages/contact/contact",
+				"iconPath": "static/images/Group 4.png",
+				"selectedIconPath": "static/images/Group 4.png",
+				"text": "通讯录"
 			},
 			{
 				"pagePath": "pages/group/group",

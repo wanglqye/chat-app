@@ -50,11 +50,11 @@
 	const search = async () => {
 		console.log('???',searchval.value)
 		let res = await  request({
-			url:"/search/user",
+			url:"/user/find",
 			data:{
-				data:searchval.value
+				searchval:searchval.value
 			},
-			method:"post"
+			method:"get"
 		})
 		console.log(res)
 		if(res.status && res.data && res.data.length > 0){

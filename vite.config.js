@@ -10,7 +10,18 @@ export default defineConfig({
     },
     extensions: ['.mjs', '.js', '.jsx', '.json', '.vue'],
   },
+  
   plugins: [
     uni()
   ],
+  // server:{
+	 //  port:5000,
+	 //  proxy:{
+		//   '/api':{
+		// 	  target:"http://localhost:3000",
+		// 	  changeOrigin: true,
+		// 	  rewrite: (path) => path.replace(/^\/api/, '')
+		//   }
+	 //  }
+  // }
 })
