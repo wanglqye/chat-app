@@ -15,7 +15,7 @@ const store =  createStore({
 		dialogueList: [],          //聊天列表，
 		friends:{} ,               //好友分组列表
 		friend_list:[],            //好友列表
-		total:0,                   //好友的数量
+		friend_total:0,                   //好友的数量
 		groupList:{},              //群列表
 		groupInfo:{},              //群详情
 		g_nickName:"",			   //群内的昵称

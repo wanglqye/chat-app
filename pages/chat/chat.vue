@@ -12,7 +12,15 @@
 </template>
 
 <script setup>
-	import comtarbar from '../../components/comtarbar.vue'
+	import { onMounted,getCurrentInstance, ref } from "vue";
+    import comtarbar from '../../components/comtarbar.vue'
+	
+	let userId = ref('')
+	
+	onMounted(()=>{
+		let options = getCurrentInstance()
+		userId.value = options.attrs.id
+	})
 </script>
 
 <style lang="scss">

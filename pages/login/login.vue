@@ -28,7 +28,7 @@ import {request} from '../../api/http.js'
 	
 	
 	const state = reactive({
-		username:'小王',
+		username:'王野',
 		pwd:'123456'
 	})
 	

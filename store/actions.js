@@ -15,7 +15,10 @@ const actions = {
 	async getFriends(context){
 		console.log('context',context)
 		let { state } = context
-		let res = await request({ url:'friend/friends'})
+		let res = await request({ url:'/friend/getFriendsList'})
+		state.friends = res.data;
+		state.friend_list = res.friend_list
+		state.friend_total = res.total
 		console.log('好友列表',res)
 	}
 	
