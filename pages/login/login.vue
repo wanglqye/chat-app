@@ -11,8 +11,8 @@
 				<text class="cont-title">登录</text>
 				<text class="cont-desc">您好，欢迎来到CHat ~</text>
 				<view class="cont-inparea">
-					<input v-model="state.username" :value="state.username" type="text" class="cont-inp" placeholder="用户名/邮箱">
-					<input v-model="state.pwd" :value="state.pwd" type="text" class="cont-inp" placeholder="密码">
+					<input v-model="state.username"  type="text" class="cont-inp" placeholder="用户名/邮箱">
+					<input v-model="state.pwd"  type="text" class="cont-inp" placeholder="密码">
 				</view>
 				<view class="cont-button">
 					<view class="btn-style" @tap="submit">登录</view>

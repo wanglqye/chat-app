@@ -23,8 +23,8 @@
 		justify-content: center;
 		align-items: center;
 		image {
-			width: 24rpx;
-			height: 24rpx;
+			width: 18rpx;
+			height: 18rpx;
 		}
 	}
 	.center {

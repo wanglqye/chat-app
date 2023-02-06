@@ -3,7 +3,7 @@
 		<view class="main-bar">
 			<view class="left-content"><slot name="left"></slot></view>
 			<view class="right-content">
-				<image src="../static/images/search.png" mode=""></image>
+				<image src="../static/images/new_search.png" mode="" @tap="gotoSearch"></image>
 				<image src="../static/images/add.png" mode=""></image>
 			</view>
 		</view>
@@ -12,6 +12,12 @@
 
 <script setup>
 	import { defineProps }  from 'vue'
+	
+	function gotoSearch(){
+		uni.navigateTo({
+			url:'/pages/search/search'
+		})
+	}
 </script>
 
 <style lang="scss">

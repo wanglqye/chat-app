@@ -8,6 +8,10 @@ const getters = {
 	getTotal: state => {
 		return state.friend_total
 	},
+	// 获取聊天用户的名称
+	getName: state => {
+		return state.name
+	},
 }
 
 export default getters

@@ -10,7 +10,7 @@
 					<text class="bar-title">CHat</text>
 				</view>
 				<view class="top-bar-right">
-					<image src="../../static/images/new_search.png" mode="" class="first-img" @click="gotoSearch"></image>
+					<image src="../../static/images/new_search.png" mode="" class="first-img" @tap="gotoSearch"></image>
 					<image src="../../static/images/add.png" mode=""></image>
 				</view>
 			</view>
