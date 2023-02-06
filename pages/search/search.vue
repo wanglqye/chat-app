@@ -15,7 +15,7 @@
 						<!-- <image :src="item.avator" mode=""></image> -->
 						<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
 						<text>{{item.name}}</text>
-						<view class="list-btn" :class="[item.status == 0 ? 'isFriend':'']">{{item.status == 0 ? '发消息' : '加好友'}}</view>
+						<view class="list-btn" :class="[item.isFriend == 1 ? 'isFriend':'']" @tap="opeaCLick(item.isFriend)">{{item.isFriend == 1 ? '发消息' : '加好友'}}</view>
 					</view> 
 				</view>
 			</view>
@@ -60,6 +60,9 @@
 		if(res.status && res.data && res.data.length > 0){
 			data.value = res.data
 		}
+	}
+	const opeaCLick = (status) =>{
+		console.log('status',status)
 	}
 	// const data = [
 	// 	{
