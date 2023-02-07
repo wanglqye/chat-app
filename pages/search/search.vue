@@ -15,7 +15,7 @@
 						<!-- <image :src="item.avator" mode=""></image> -->
 						<image src="https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg" mode=""></image>
 						<text>{{item.name}}</text>
-						<view class="list-btn" :class="[item.status == 0 ? 'isFriend':'']">{{item.status == 0 ? '发消息' : '加好友'}}</view>
+						<view class="list-btn" :class="[item.isFriend == 1 ? 'isFriend':'']" @tap="handleOpear(item)">{{item.isFriend == 1 ? '发消息' : '加好友'}}</view>
 					</view> 
 				</view>
 			</view>
@@ -56,9 +56,42 @@
 			},
 			method:"get"
 		})
-		console.log(res)
-		if(res.status && res.data && res.data.length > 0){
+		console.log('res',res)
+		if(res.status){
 			data.value = res.data
+		}else{
+			data.value = []
+		}
+	}
+	const handleOpear = async (item) => {
+		// console.log('item',item)
+		if(item.isFriend == 1) {
+			// 跳转聊天页面
+			uni.navigateTo({
+				url:'../chat/chat?id='+ item._id
+			})
+		}else{
+			let res = await  request({
+				url:"/friend/addFriend",
+				data:{
+					id:item._id,
+					note:`我是${item.name}`
+				},
+				method:"post"
+			})
+			console.log('rss',res)
+			if(res.status == 200){
+				uni.showToast({
+					icon:'success',
+					title:res.msg || '发送成功啦'
+				})
+				
+			}else{
+				uni.showToast({
+					icon:'error',
+					title:res.msg || '发送失败啦'
+				})
+			}
 		}
 	}
 	// const data = [
