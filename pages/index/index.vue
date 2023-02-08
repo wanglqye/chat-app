@@ -56,9 +56,11 @@
 
 <script setup>
 import { onMounted,ref } from "vue";
-
+import { useStore } from 'vuex';
 // import NavHeader from '../../components/navHeader.vue'
+
 	const msgList = ref([])
+	const store = useStore()
 	
 	const gotoSearch = () => {
 		uni.navigateTo({
@@ -98,6 +100,7 @@ import { onMounted,ref } from "vue";
 			},
 		]
 		console.log(msgList.value)
+		store.dispatch('connectSocket')
 	})
 	
 </script>
