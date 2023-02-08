@@ -1,5 +1,9 @@
 import {request} from "../api/http.js"
+import socket from '../utils/socket.js'
 const actions = {
+	connectSocket(context,data){
+		socket.connect(context,data)
+	},
 	// 获取用户信息
 	// async getUserInfo(context) {
 	// 	let {

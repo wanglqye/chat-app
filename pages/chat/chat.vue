@@ -30,12 +30,14 @@
 				</view>
 			</scroll-view>
 		</view>
+		<chatBottom class="chat-bottom" />
 	</view>
 </template>
 
 <script setup>
 	import { onMounted,getCurrentInstance, ref,computed } from "vue";
-    import comtarbar from '../../components/comtarbar.vue'
+    import comtarbar from '../../components/comtarbar.vue';
+	import chatBottom from '../../components/chatBottom.vue';
 	import {useStore} from "vuex"
 	
 	const store = useStore()
@@ -57,6 +59,14 @@
 </script>
 
 <style lang="scss">
+.content{
+	box-sizing: border-box;
+	padding-top: var(--status-bar-height);
+	background: white;
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+}
 .comtarbar{
 	background: #f4f4f4;
 	height: 88rpx;
@@ -72,12 +82,14 @@
 }
 .messagebox {
 	// margin-top: 88rpx;
+	// flex:1;
+	height: 1300rpx;
 	background: white;
 	position: relative;
 	box-sizing: border-box;
 	padding-bottom: 10rpx;
 	background-color: papayawhip;
-	height: 1500rpx;
+	overflow:hidden;
 	.scroll-y{
 		height: 100%;
 		.contentbox {
@@ -104,7 +116,7 @@
 					border-radius: 10rpx;
 					padding: 16rpx 10rpx;
 					max-width: 60%;
-					background: peachpuff;
+					background: #fff;
 					font-size: 28rpx;
 					min-height: 40rpx;
 					line-height: 40rpx;
@@ -135,7 +147,7 @@
 					left: -14rpx;
 					top: 12px;
 					border-top: solid 16rpx transparent;
-					border-right: solid 16rpx peachpuff;
+					border-right: solid 16rpx #fff;
 					border-bottom: solid 16rpx transparent;
 				}
 			}
@@ -168,7 +180,7 @@
 					border-radius: 10rpx;
 					padding: 16rpx 10rpx;
 					max-width: 60%;
-					background: paleturquoise;
+					background: $uni-color-primary;
 					font-size: 30rpx;
 					min-height: 40rpx;
 					line-height: 40rpx;
@@ -182,7 +194,7 @@
 					width: 0;
 					height: 0;
 					border-top: solid 16rpx transparent;
-					border-left: solid 16rpx paleturquoise;
+					border-left: solid 16rpx $uni-color-primary;
 					border-bottom: solid 16rpx transparent;
 				}
 			}
@@ -190,5 +202,10 @@
 		}
 		
 	}
+}
+.chat-bottom{
+	// width:300rpx;
+	// height: 300rpx;
+	background-color: pink;
 }
 </style>
