@@ -25,6 +25,7 @@
 <script setup>
 import { reactive,inject } from "vue";
 import {request} from '../../api/http.js'
+import { useStore } from 'vuex'
 	
 	
 	const state = reactive({
@@ -32,8 +33,9 @@ import {request} from '../../api/http.js'
 		pwd:'123456'
 	})
 	
+	const store = useStore()
+	
 	const submit = async () => {
-		console.log('??')
 	  let res = await request({
 			url:'/login',
 			data:state,
@@ -41,9 +43,16 @@ import {request} from '../../api/http.js'
 		})
 		console.log(res)
 		if(res.status == 200){
-			uni.switchTab({
-				url:'/pages/index/index'
-			})
+			uni.showToast({
+				title: res.msg,
+				duration: 2000 
+			});
+			uni.setStorageSync('token',res.back.token)
+			setTimeout(()=>{
+				uni.switchTab({
+					url:'/pages/index/index'
+				})
+			},2000)
 		}
 	}
 
