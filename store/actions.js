@@ -1,8 +1,23 @@
 import {request} from "../api/http.js"
-import socket from '../utils/socket.js'
+import io from '../js_sdk/socket-io/socket.io'
 const actions = {
-	connectSocket(context,data){
-		socket.connect(context,data)
+	connect(context,data){
+		let { state } = context
+		// 服务器地址
+		state.socket = io.connect("ws://localhost:3008");
+		console.log('链接成功',state.socket)
+		let socket = state.socket;
+		socket.on("news",data =>{
+			console.log('data',data)
+			socket.emit("qiata",{my:"data"})
+		})
+		// 更新新动态通知表
+		socket.on("getDyNotify", () => {
+			console.log("新动态")
+			this.dispatch("getDyNotify")
+		})
+		// 登录
+		// socket.emit("submit", data)
 	},
 	// 获取用户信息
 	// async getUserInfo(context) {
@@ -24,6 +39,13 @@ const actions = {
 		state.friend_list = res.friend_list
 		state.friend_total = res.total
 		console.log('好友列表',res)
+	},
+	// 获取动态通知表
+	aysnc getDyNotify(context){
+		let { state } = context
+		let res = await request({url:'dynamic/notify/get',data:{ token: uni.getStorageSync('token')}})
+		console.log('············',res)
+		this.commit('changeDyNotify',res[1].data)
 	}
 	
 }

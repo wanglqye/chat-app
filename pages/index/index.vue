@@ -22,7 +22,7 @@
 				</view>
 				<view class="item-textarea">
 					<view class="item-name">
-						好友请求
+						系统通知
 					</view>
 					<view class="item-msg">
 						就是你的那额，不用点开始速就是你的那额，不用点开始速就是你的那额，不用点开始速
@@ -100,7 +100,7 @@ import { useStore } from 'vuex';
 			},
 		]
 		console.log(msgList.value)
-		store.dispatch('connectSocket')
+		store.dispatch('connect')
 	})
 	
 </script>

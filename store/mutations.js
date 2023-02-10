@@ -9,6 +9,11 @@ const mutations = {
 	changeChatName(state, name) {
 		state.name = name
 	},
+	// 动态通知表
+	changeDyNotify(state, array) {
+		state.dyNotify = array
+		this.commit("prompt")
+	},
 }
 
 export default mutations
