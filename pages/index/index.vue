@@ -55,13 +55,13 @@
 </template>
 
 <script setup>
-import { onMounted,ref } from "vue";
+import { onMounted,ref,computed } from "vue";
 import { useStore } from 'vuex';
 // import NavHeader from '../../components/navHeader.vue'
 
 	const msgList = ref([])
 	const store = useStore()
-	
+	const notify = computed(()=>store.getters.getNotify)
 	const gotoSearch = () => {
 		uni.navigateTo({
 			url:'/pages/search/search'
@@ -100,6 +100,7 @@ import { useStore } from 'vuex';
 			},
 		]
 		console.log(msgList.value)
+		store.dispatch('getDyNotify')
 		store.dispatch('connect')
 	})
 	

@@ -41,11 +41,12 @@ const actions = {
 		console.log('好友列表',res)
 	},
 	// 获取动态通知表
-	aysnc getDyNotify(context){
+	async getDyNotify(context){
+		console.log('?')
 		let { state } = context
-		let res = await request({url:'dynamic/notify/get',data:{ token: uni.getStorageSync('token')}})
+		let res = await request({url:'/notify/notice'})
 		console.log('············',res)
-		this.commit('changeDyNotify',res[1].data)
+		// this.commit('changeDyNotify',res[1].data)
 	}
 	
 }
