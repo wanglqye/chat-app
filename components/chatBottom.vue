@@ -23,11 +23,66 @@
 				<view class="send"  @tap="sendMsg"><view class="btnbox">发送</view></view>
 			</view>
 		</view>
+		<view class="panel-bottom" :animation="animationData">
+			<emoji @emotion="emotion" v-show="type == 'emoji'"></emoji>
+			<view class="bottom-box" v-show="type == 'model'">
+				<view class="module" @tap="selectImg">
+					<view class="module-item"><image lazy-load src="../static/images/chat/photo.png" mode="widthFix"></image></view>
+					<view class="module-title">照片</view>
+				</view>
+				<view class="module">
+					<view class="module-item"><image lazy-load src="../static/images/chat/camera.png" mode="widthFix"></image></view>
+					<view class="module-title">拍摄</view>
+				</view>
+				<view class="module" @tap="chooseLocation">
+					<view class="module-item"><image lazy-load src="../static/images/chat/position.png" mode="widthFix"></image></view>
+					<view class="module-title">位置</view>
+				</view>
+				<view class="module">
+					<view class="module-item"><image lazy-load src="../static/images/chat/video.png" mode="widthFix"></image></view>
+					<view class="module-title">视频</view>
+				</view>
+				<view class="module">
+					<view class="module-item"><image lazy-load src="../static/images/chat/file.png" mode="widthFix"></image></view>
+					<view class="module-title">文件</view>
+				</view>
+				<!-- <view class="module" @tap="money">
+					<view class="module-item"><image class="hongbao" lazy-load src="../static/images/chat/hongbao.png" mode="widthFix"></image></view>
+					<view class="module-title">红包</view>
+				</view> -->
+			</view>
+		</view>
 	</view>
 </template>
 
 <script setup>
-	
+	import { ref,reactive } from 'vue';
+	const state = reactive({
+		type:'emoji',
+		isShow:false
+	})
+	// 动画
+	const show = (type) => {
+		if(type == state.type){
+			state.isShow = !state.isShow
+		}else{
+			state.type = type
+			if(!state.isShow){
+				state.isShow = !state.isShow
+			}else{
+				return;
+			}
+		}
+		let animation = uni.createAnimation({
+			duration:2000,
+			timingFunction:'ease'
+		})
+		if (state.isShow) {
+			animation.height('380rpx').step();
+		} else {
+			animation.height('0rpx').step();
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -128,6 +183,54 @@
 					text-align: center;
 					margin-bottom: 24rpx;
 				}
+			}
+		}
+	}
+	.panel-bottom {
+		background: #ecedee;
+		height: 0rpx;
+		overflow: hidden;
+		.bottom-box {
+			margin: 30rpx;
+			width: calc(100vw - 60rpx);
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			.module {
+				width: 25%;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+				margin-bottom: 30rpx;
+				.module-item {
+					width: 100rpx;
+					height: 100rpx;
+					border-radius: 10rpx;
+					background: white;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					image {
+						width: 60%;
+						height: 60%;
+					}
+					.hongbao {
+						width: 70%;
+						height: 70%;
+					}
+				}
+				.module-title {
+					width: 100%;
+					font-size: 24rpx;
+					color: rgba(39, 40, 50, 0.5);
+					height: 60rpx;
+					line-height: 60rpx;
+					text-align: center;
+				}
+			}
+			.emoji {
+				margin-top: 30rpx;
 			}
 		}
 	}

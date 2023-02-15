@@ -14,6 +14,10 @@ const mutations = {
 		state.dyNotify = array
 		this.commit("prompt")
 	},
+	changeAcquire(state, number) {
+		state.acquire = number;
+		this.commit("prompt")
+	},
 }
 
 export default mutations

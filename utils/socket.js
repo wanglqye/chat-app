@@ -14,6 +14,11 @@ const socket = {
 			console.log('data',data)
 			socket.emit("qiata",{my:"data"})
 		})
+		// 更新新动态通知表
+		socket.on("getDyNotify", () => {
+			console.log("新动态")
+			this.dispatch("getDyNotify")
+		})
 		// 登录
 		// socket.emit("submit", data)
 	}

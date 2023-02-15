@@ -47,7 +47,20 @@ const actions = {
 		let res = await request({url:'/notify/notice'})
 		console.log('············',res)
 		// this.commit('changeDyNotify',res[1].data)
-	}
+	},
+	// 获取好友请求数量
+	async getAcquire(context){
+		let { state } = context
+		let res = await request({url:'/friend/getFriendApply'})
+		this.commit('changeAcquire',res.data.applyList.length)
+	},
+	// 处理好友请求
+	dealFriend(context, data) {
+		let {
+			state
+		} = context
+		state.socket.emit("deal", data)
+	},
 	
 }
 

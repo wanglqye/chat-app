@@ -6,6 +6,21 @@
 			</template>
 		</navHeader>
 		<scroll-view class="main-content">
+			<view class="ground">
+				<view class="item" @tap="goRequest">
+					<view class="item-left">
+						<view class="imgbox"><image src="../../static/images/users/newfriend.svg" mode="widthFix"></image></view>
+					</view>
+					<view class="item-right">新的朋友</view>
+					<view class="tip" v-if="getAcquire">{{ getAcquire }}</view>
+				</view>
+				<view class="item" @tap="goGroup">
+					<view class="item-left">
+						<view class="imgbox"><image src="../../static/images/users/ground.svg" mode="widthFix"></image></view>
+					</view>
+					<view class="item-right">群聊</view>
+				</view>
+			</view>
 			<template v-for="(value,key,index) in friends">
 				<view class="ground" v-if="value.length> 0">
 					<view class="ground-item" :id="key">{{ key }}</view>
@@ -93,12 +108,17 @@
 	
 	// 跳转详情页
 	function goInfo(id){
-		console.log(id)
 		uni.navigateTo({
 			url:'../chat/chat?id='+ id
 		})
 	}
 	
+	// 好友请求页面
+	function goRequest() {
+		uni.navigateTo({
+			url: '../request/request'
+		});
+	}
 	
 	onMounted(()=>{
 		store.dispatch('getFriends')
@@ -126,7 +146,7 @@
 }
 .main-content {
 	padding-bottom: 0rpx !important; 
-	padding-top: 104rpx;
+	padding-top: 90rpx;
 	padding-bottom: $uni-spacing-col-base;
 	.item {
 		display: flex;

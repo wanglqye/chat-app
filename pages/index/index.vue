@@ -100,8 +100,6 @@ import { useStore } from 'vuex';
 			},
 		]
 		console.log(msgList.value)
-		store.dispatch('getDyNotify')
-		store.dispatch('connect')
 	})
 	
 </script>
