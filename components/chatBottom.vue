@@ -23,9 +23,9 @@
 				<view class="send"  @tap="sendMsg"><view class="btnbox">发送</view></view>
 			</view>
 		</view>
-		<view class="panel-bottom" :animation="animationData">
-			<emoji @emotion="emotion" v-show="type == 'emoji'"></emoji>
-			<view class="bottom-box" v-show="type == 'model'">
+		<view class="panel-bottom" :animation="state.animationData">
+			<emoji @emotion="emotion" v-show="state.type == 'emoji'"></emoji>
+			<view class="bottom-box" v-show="state.type == 'model'">
 				<view class="module" @tap="selectImg">
 					<view class="module-item"><image lazy-load src="../static/images/chat/photo.png" mode="widthFix"></image></view>
 					<view class="module-title">照片</view>
@@ -56,17 +56,37 @@
 </template>
 
 <script setup>
-	import { ref,reactive } from 'vue';
+	import { ref,reactive,onMounted } from 'vue';
 	const state = reactive({
 		type:'emoji',
-		isShow:false
+		isShow:false,
+		height:0,
+		animationData:{}
 	})
+	onMounted(() => {
+		getMeasureHeight()
+	})
+	
+	const emit = defineEmits(['measure'])
+	
+	function getMeasureHeight(){
+		const query = uni.createSelectorQuery().in(this)
+		query.select('.panel').boundingClientRect(data => {
+				state.height = data.height;
+				setTimeout(()=> {
+					emit('measure',data.height)
+				})
+		}).exec()
+	}
+	 
 	// 动画
 	const show = (type) => {
+		console.log('??')
 		if(type == state.type){
 			state.isShow = !state.isShow
 		}else{
 			state.type = type
+			console.log(state.type);
 			if(!state.isShow){
 				state.isShow = !state.isShow
 			}else{
@@ -74,7 +94,7 @@
 			}
 		}
 		let animation = uni.createAnimation({
-			duration:2000,
+			duration:1000,
 			timingFunction:'ease'
 		})
 		if (state.isShow) {
@@ -82,6 +102,16 @@
 		} else {
 			animation.height('0rpx').step();
 		}
+		setTimeout(() => {
+			const query = uni.createSelectorQuery().in(this);
+			query
+			.select('.panel')
+			.boundingClientRect(data => {
+			emit('measure', data.height);
+			})
+			.exec();
+		}, 20);
+		state.animationData = animation.export()
 	}
 </script>
 

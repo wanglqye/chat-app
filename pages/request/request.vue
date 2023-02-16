@@ -43,7 +43,7 @@
 		})
 		if(res.status == 200) {
 			console.log(res);
-			applyList.value = res.data.applyList
+			applyList.value = res.addRequire.applyList
 		}
 	}
 	// 处理请求

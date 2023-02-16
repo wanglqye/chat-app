@@ -30,12 +30,12 @@
 				</view>
 			</scroll-view>
 		</view>
-		<chatBottom class="chat-bottom" />
+		<chatBottom class="chat-bottom" @measure="measure"/>
 	</view>
 </template>
 
 <script setup>
-	import { onMounted,getCurrentInstance, ref,computed } from "vue";
+	import { onMounted,getCurrentInstance, ref,computed,reactive } from "vue";
     import comtarbar from '../../components/comtarbar.vue';
 	import chatBottom from '../../components/chatBottom.vue';
 	import {useStore} from "vuex"
@@ -43,7 +43,14 @@
 	const store = useStore()
 	let userId = ref('')
 	const type = ref('private')
-	const contentHeight = ref(0)
+	const contentHeight = ref(0) 
+	const state = reactive({
+		scrHeight:0, //屏幕高度
+		ctbHeight:0,  // 头部组件高度
+		scrollHeight:0,  //滚动区域的视口高度
+		panelHeight:0, //底部组件高度
+		contentHeight:0  //聊天区域高度
+ 	})
 	
 	
 	const getName = computed(()=>store.getters.getName)
@@ -51,11 +58,43 @@
 	console.log('getname,',getName)
 	
 	onMounted(()=>{
+		getHeight() 
+		measure()
 		let options = getCurrentInstance()
 		userId.value = options.attrs.id
 		store.commit("changeChatId", options.attrs.id) 
 		
-	})
+	}) 
+	
+	// 接收子组件高度
+	const measure = (height) =>{
+		console.log('子组件高度',height);
+	}
+	
+	const getHeight = () => {
+		const query = uni.createSelectorQuery().in(this)
+		uni.getSystemInfo({
+			success: res =>{
+				state.scrHeight = res.windowHeight;
+				console.log('?')
+				query.select('.comtarbar').boundingClientRect(data => {
+					state.ctbHeight = data.height
+					state.scrollHeight = state.scrHeight - state.ctbHeight - state.panelHeight
+				}).exec()
+			}
+		})
+		console.log('queyr',query)
+	}
+	
+	// 获取聊天区域的高度
+	function getConent(){
+		const query = uni.createSelectorQuery().in(this)
+		query.select('.content').boundingClientRect(data => {
+			if(data){
+				state.contentHeight = data.height
+			}
+		}).exec()
+	}
 </script>
 
 <style lang="scss">
