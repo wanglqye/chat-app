@@ -18,7 +18,7 @@
 				</view> -->
 			</view>
 			<view class="panel-right">
-				<view class="emoji"><image src="../static/images/chat/emoji.png" mode="widthFix"></image></view>
+				<view class="emoji"  @tap="show('emoji')"><image src="../static/images/chat/emoji.png" mode="widthFix"></image></view>
 				<view class="add" @tap="show('model')"><image src="../static/images/chat/add.png" mode="widthFix"></image></view>
 				<view class="send"  @tap="sendMsg"><view class="btnbox">发送</view></view>
 			</view>
@@ -57,6 +57,7 @@
 
 <script setup>
 	import { ref,reactive,onMounted } from 'vue';
+	import emoji from './emoji.vue'
 	const state = reactive({
 		type:'emoji',
 		isShow:false,
@@ -112,6 +113,10 @@
 			.exec();
 		}, 20);
 		state.animationData = animation.export()
+	}
+	// 选择表情
+	function emotion(emoji){
+		console.log('emojo',emoji);
 	}
 </script>
 
