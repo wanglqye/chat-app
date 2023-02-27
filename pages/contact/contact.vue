@@ -24,7 +24,7 @@
 			<template v-for="(value,key,index) in friends">
 				<view class="ground" v-if="value.length> 0">
 					<view class="ground-item" :id="key">{{ key }}</view>
-					<view class="item" v-for="(item,index) in value" @tap="goInfo(item._id)">
+					<view class="item" v-for="(item,index) in value" @tap="goInfo(item._id,item.type)">
 						<view class="item-left">
 							<view class="imgbox"><image :src="item.user.avatars || 'https://www.apizl.com/uploads/apizl/image/2017/12/12/1513058537415773.jpg'" mode="aspectFill"></image></view>
 						</view>
@@ -55,6 +55,8 @@
 	const friendsTotal = computed(()=>store.getters.getTotal)
 	// const friendsTotal = store.state.friendsTotal
 	const alphabet = ref()
+	
+	console.log('friends',friends)
 	
 	// 生成右侧导航条数据
 	const getAlphabet = () => {
@@ -107,9 +109,9 @@
 	}
 	
 	// 跳转详情页
-	function goInfo(id){
+	function goInfo(id,type){
 		uni.navigateTo({
-			url:'../chat/chat?id='+ id
+			url:'../chat/chat?id='+ id + '&type='+ type
 		})
 	}
 	

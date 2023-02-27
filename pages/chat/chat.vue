@@ -30,7 +30,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		<chatBottom class="chat-bottom" @measure="measure"/>
+		<chatBottom class="chat-bottom" @measure="measure" :chatType="type"/>
 	</view>
 </template>
 
@@ -55,13 +55,13 @@
 	
 	const getName = computed(()=>store.getters.getName)
 	
-	console.log('getname,',getName)
 	
 	onMounted(()=>{
 		getHeight() 
-		measure()
 		let options = getCurrentInstance()
+		console.log('?????',options)
 		userId.value = options.attrs.id
+		type.value = options.attrs.type || 'private'
 		store.commit("changeChatId", options.attrs.id) 
 		
 	}) 
@@ -95,6 +95,7 @@
 			}
 		}).exec()
 	}
+	
 </script>
 
 <style lang="scss">

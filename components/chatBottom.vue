@@ -11,7 +11,7 @@
 			</view>
 			<view class="panel-center">
 				<view class="inputbox">
-					<textarea class="c_input" v-model="content" auto-height="true"></textarea>
+					<textarea class="c_input" v-model=" state.content" auto-height="true"></textarea>
 				</view>
 				<!-- <view class="inputbox s_btn">
 					按住说话
@@ -58,11 +58,12 @@
 <script setup>
 	import { ref,reactive,onMounted } from 'vue';
 	import emoji from './emoji.vue'
+	import { useStore } from 'vuex'
 	const state = reactive({
 		type:'emoji',
 		isShow:false,
 		height:0,
-		animationData:{}
+		animationData:{},
 	})
 	onMounted(() => {
 		getMeasureHeight()
@@ -117,6 +118,35 @@
 	// 选择表情
 	function emotion(emoji){
 		console.log('emojo',emoji);
+	}
+	
+	const store = useStore()
+	
+	const props = defineProps(['chatType'])
+	// 发送消息
+	function sendMsg(){
+		console.log('??')
+		if(state.content){
+			let reg = /(\[([u4e00-\u9fa5]{1,3})|[a-zA-Z]{1,3}\])/g;
+			let emoji_list = this.content.replace(reg, list_item => {
+				let emojiItem = emojiList.filter(item => {
+					return item.alt == list_item;
+				});
+				// src需要换成自己的服务器地址
+				let imgstr = '<img class="emoji" src="http://localhost:3008/emoji/' + emojiItem[0].url + '">';
+				// let imgstr = '<img class="emoji" src="http://www.yemengs.cn/emoji/' + emojiItem[0].url + '">';
+				return imgstr;
+			});
+		}
+		console.log('props.chatType',props.chatType)
+		console.log('token',uni.getStorageSync('token'))
+		// store.dispatch('sendMsg',{
+		// 	message:emoji_list,
+		// 	id:1,
+		// 	token:uni.getStorageSync('token'),
+		// 	type:'text',
+		// 	chatType:props.chatType
+		// })
 	}
 </script>
 
