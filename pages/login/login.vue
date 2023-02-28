@@ -49,6 +49,7 @@ import { useStore } from 'vuex'
 			});
 			store.dispatch('getAcquire')
 			store.dispatch('connect') 
+			store.dispatch("getUserInfo")
 			uni.setStorageSync('token',res.back.token)
 			setTimeout(()=>{
 				uni.switchTab({

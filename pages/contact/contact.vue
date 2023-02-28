@@ -110,6 +110,7 @@
 	
 	// 跳转详情页
 	function goInfo(id,type){
+		type = type ? type : 'private'
 		uni.navigateTo({
 			url:'../chat/chat?id='+ id + '&type='+ type
 		})

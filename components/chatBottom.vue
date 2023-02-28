@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-	import { ref,reactive,onMounted } from 'vue';
+	import { ref,reactive,onMounted,toRefs,getCurrentInstance } from 'vue';
 	import emoji from './emoji.vue'
 	import { useStore } from 'vuex'
 	const state = reactive({
@@ -122,13 +122,16 @@
 	
 	const store = useStore()
 	
-	const props = defineProps(['chatType'])
+	const propsData = defineProps('id')
+	console.log('propsData',propsData)
+	
+	// const { props } =getCurrentInstance();
 	// 发送消息
 	function sendMsg(){
 		console.log('??')
 		if(state.content){
 			let reg = /(\[([u4e00-\u9fa5]{1,3})|[a-zA-Z]{1,3}\])/g;
-			let emoji_list = this.content.replace(reg, list_item => {
+			let emoji_list = state.content.replace(reg, list_item => {
 				let emojiItem = emojiList.filter(item => {
 					return item.alt == list_item;
 				});
@@ -137,16 +140,15 @@
 				// let imgstr = '<img class="emoji" src="http://www.yemengs.cn/emoji/' + emojiItem[0].url + '">';
 				return imgstr;
 			});
+			store.dispatch('sendMsg',{
+				message:emoji_list,
+				id:propsData.id,
+				token:uni.getStorageSync('token'),
+				type:'text',
+				chatType:propsData.chatType
+			})
 		}
-		console.log('props.chatType',props.chatType)
-		console.log('token',uni.getStorageSync('token'))
-		// store.dispatch('sendMsg',{
-		// 	message:emoji_list,
-		// 	id:1,
-		// 	token:uni.getStorageSync('token'),
-		// 	type:'text',
-		// 	chatType:props.chatType
-		// })
+		
 	}
 </script>
 

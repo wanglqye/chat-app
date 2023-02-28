@@ -30,7 +30,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		<chatBottom class="chat-bottom" @measure="measure" :chatType="type"/>
+		<chatBottom class="chat-bottom" @measure="measure" :chatType="type" :id="userId"/>
 	</view>
 </template>
 
@@ -59,8 +59,8 @@
 	onMounted(()=>{
 		getHeight() 
 		let options = getCurrentInstance()
-		console.log('?????',options)
 		userId.value = options.attrs.id
+		console.log('userid.value',userId.value)
 		type.value = options.attrs.type || 'private'
 		store.commit("changeChatId", options.attrs.id) 
 		

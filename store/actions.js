@@ -20,16 +20,16 @@ const actions = {
 		// socket.emit("submit", data)
 	},
 	// 获取用户信息
-	// async getUserInfo(context) {
-	// 	let {
-	// 		state
-	// 	} = context
-	// 	let result = await request({
-	// 		url: '/user/info',
-	// 	});
-	// 	console.log(result)
-	// 	// state.user = result[1].data.user;
-	// },
+	async getUserInfo(context) {
+		let {
+			state
+		} = context
+		let result = await request({
+			url: '/user/info',
+		});
+		console.log('用户信息',result)
+		state.user = result.data
+	},
 	// 获取好友列表
 	async getFriends(context){
 		console.log('context',context)
@@ -52,7 +52,7 @@ const actions = {
 	async getAcquire(context){
 		let { state } = context
 		let res = await request({url:'/friend/getFriendApply'})
-		this.commit('changeAcquire',res.data.applyList.length)
+		// this.commit('changeAcquire',res.data.applyList.length)
 	},
 	// 处理好友请求
 	dealFriend(context, data) {
@@ -61,6 +61,27 @@ const actions = {
 		} = context
 		state.socket.emit("deal", data)
 	},
+	// 发送消息
+	async sendMsg(context,data){
+		let { state } = context
+		console.log(context,'state')
+		state.socket.emit('sendMsg',data)
+		if(state.chatType == 'private'){
+			this.commit('updateChatMsg',{ belong:state.user._id,date:new Date(),message:data.message,type:data.type})
+		}else{
+			this.commit('updateChatMsg',
+			{ 
+				belong: state.user._id,
+				user:{
+					name:state.user.name,
+					avatars:state.user.avatars,
+					}, 
+				date: new Date(), 
+				message:data.message, 
+				type: data.type ,
+			});
+		}
+	}
 	
 }
 

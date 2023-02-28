@@ -18,6 +18,19 @@ const mutations = {
 		state.acquire = number;
 		this.commit("prompt")
 	},
+	// 更新聊天信息（本地添加，减少请求）
+	updateChatMsg(state,data){
+		let msg_list = state.chatHistory.msg_list
+		console.log('msg_list',msg_list)
+		if(msg_list && msg_list.length > 0) {
+			let lastItem = msg_list[msg_list.length -1]
+			let time = new Date(lastItem.date).getTime()
+			let current = new Date(data.date).getTime()
+			let distant = (curent -time )/ 1000 / 60
+			distant >= 10 ? "" : data.date = ""
+			state.chatHistory.msg_list.push(data)
+		}
+	}
 }
 
 export default mutations
